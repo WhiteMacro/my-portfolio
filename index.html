@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pr0ton</title>
+    <link rel="icon" type="image/png" href="logo.png">
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden; 
+            background: black;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            color: white;
+        }
+
+        nav {
+            background-color: #1a1a2e;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            margin: 10px;
+            position: relative;
+            z-index: 10;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            margin: 0 10px;
+            padding: 5px 10px;
+            transition: color 0.3s ease, background-color 0.3s ease;
+            border-radius: 5px;
+        }
+
+        nav a:hover {
+            color: #1a1a2e;
+            background-color: #00ffcc;
+        }
+
+        .menu {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+            border-radius: 50%;
+        }
+
+        .logo span {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .socials {
+            display: flex;
+            align-items: center;
+        }
+
+        .socials a {
+            margin-left: 10px;
+        }
+
+        .socials img {
+            height: 30px;
+            width: 30px;
+            border-radius: 5px;
+            transition: transform 0.3s ease;
+        }
+
+        .socials img:hover {
+            transform: scale(1.1);
+        }
+
+        .container {
+            width: 100vw;
+            height: 100vh;
+            position: fixed; 
+            top: 0;
+            left: 0;
+            z-index: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container"></div>
+    <nav>
+        <div class="logo">
+            <img src="logo.png" alt="Logo">
+            <span>Pr0ton</span>
+            <audio id="background-audio" src="lofi.mp3" loop></audio>
+        </div>
+        <div class="menu">
+            <a href="#">Home</a>
+            <a href="#">Projects</a>
+            <a href="#">Skills</a>
+            <a href="#">Contact</a>
+        </div>
+        <div class="socials">
+            <a href="https://github.com/WhiteMacro" target="_blank">
+                <img src="https://pngimg.com/d/github_PNG40.png" alt="GitHub">
+            </a>
+            <a href="https://twitter.com" target="_blank">
+                <img src="https://cdn-icons-png.flaticon.com/512/733/733579.png" alt="Twitter">
+            </a>
+        </div>
+    </nav>
+    <script>
+        const titleText = "Pr0ton";
+        let index = 0;
+
+        function typeTitle() {
+            if (index <= titleText.length) {
+                document.title = titleText.slice(0, index);
+                index++;
+                setTimeout(typeTitle, 150);
+            } else {
+                setTimeout(() => {
+                    index = 0;
+                    typeTitle();
+                }, 2000);
+            }
+        }
+
+        typeTitle();
+
+        document.addEventListener("click", () => {
+            const audio = document.getElementById("background-audio");
+            if (audio.paused) {
+                audio.play();
+            }
+        });
+    </script>
+</body>
+</html>
