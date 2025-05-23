@@ -39,8 +39,21 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 60px;
+    padding-top: 60px; /* Provides space for the rectangle above the profile-group */
     padding-bottom: 20px;
+    /* Ensure container takes full height for proper centering if needed, but flex items handle this */
+    justify-content: center; /* Vertically center the profile-group within container */
+}
+
+.profile-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform: translateY(0); /* Base transform for mouse movement, set by JS */
+    transition: transform 0.1s ease-out;
+    z-index: 2;
+    width: 100%;
+    /* No need for position: relative here if container handles vertical centering and mouse movement on profile-group */
 }
 
 .rectangle {
@@ -50,6 +63,52 @@ body {
     border-radius: 20px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     z-index: 1;
+    position: absolute; /* Position absolutely within the body or container */
+    top: 50%; /* Center vertically in body */
+    left: 50%; /* Center horizontally in body */
+    transform: translate(-50%, -50%); /* Adjust for rectangle's own size */
+    /* This needs to be coordinated with how profile-group is placed */
+    /* For this setup, we'll make the rectangle relative to the container */
+    /* Let's revert rectangle to be relative to container, and profile-group adjusts */
+    /* Remove absolute positioning from here and handle in container */
+}
+
+/* Re-thinking the layout for true centering and stacking */
+/* We'll use .container to hold both the rectangle and the profile-group,
+   and manage their stacking and alignment */
+
+.container {
+    position: relative;
+    width: 420px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Removed padding-top/bottom here, let content dictate height */
+    justify-content: center; /* Center content vertically */
+    min-height: 400px; /* Minimum height for container to see both elements */
+}
+
+.rectangle {
+    height: 200px;
+    width: 420px;
+    background-color: #008000;
+    border-radius: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    /* Now relative to container flow */
+    margin-bottom: -100px; /* Pull it up to create overlap with the profile-group */
+    /* The value -100px is half of rectangle height (200px), to make it appear half hidden */
+}
+
+.profile-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform: translateY(0); /* Base transform for mouse movement, set by JS */
+    transition: transform 0.1s ease-out;
+    z-index: 2; /* Ensure it's above the rectangle */
+    width: 100%;
+    /* No explicit positioning needed here, it flows naturally after rectangle */
 }
 
 .profile {
@@ -61,13 +120,12 @@ body {
     color: #333;
     width: 85%;
     max-width: 350px;
-    margin-top: -100px;
-    position: relative;
-    z-index: 2;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    /* Removed transform: translateY(-50%) here, as margin-top handles overlap */
+    /* It now sits naturally as the first item in profile-group */
 }
 
 .profile img {
@@ -92,4 +150,97 @@ body {
     font-size: 17px;
     color: #666;
     line-height: 1.5;
+}
+
+.status-box {
+    background-color: rgba(255, 255, 255, 0.98);
+    border-radius: 15px;
+    padding: 15px 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    width: 85%;
+    max-width: 350px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 20px; /* Space between profile and status box */
+    z-index: 2;
+    position: relative;
+}
+
+.status-box img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ddd;
+}
+
+.status-text {
+    flex-grow: 1;
+    text-align: left;
+}
+
+.status-label {
+    margin: 0;
+    font-size: 14px;
+    color: #888;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.status-description {
+    margin: 3px 0 0 0;
+    font-size: 16px;
+    color: #333;
+    line-height: 1.3;
+}
+
+.buttons {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 100;
+}
+
+.corner-button {
+    position: absolute;
+    background-color: #008000;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    pointer-events: auto;
+}
+
+.corner-button:hover {
+    background-color: #006400;
+    transform: scale(1.05);
+}
+
+.top-left {
+    top: 20px;
+    left: 20px;
+}
+
+.top-right {
+    top: 20px;
+    right: 20px;
+}
+
+.bottom-left {
+    bottom: 20px;
+    left: 20px;
+}
+
+.bottom-right {
+    bottom: 20px;
+    right: 20px;
 }
