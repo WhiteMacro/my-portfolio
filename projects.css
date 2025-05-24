@@ -35,80 +35,32 @@ body {
 
 .container {
     position: relative;
-    width: 420px;
+    width: 180px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 60px; /* Provides space for the rectangle above the profile-group */
-    padding-bottom: 20px;
-    /* Ensure container takes full height for proper centering if needed, but flex items handle this */
-    justify-content: center; /* Vertically center the profile-group within container */
+    justify-content: center;
+    min-height: 400px;
+}
+
+.rectangle {
+    height: 200px;
+    width: 420px;
+    background-color: #008000;
+    border-radius: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    margin-bottom: -100px;
 }
 
 .profile-group {
     display: flex;
     flex-direction: column;
     align-items: center;
-    transform: translateY(0); /* Base transform for mouse movement, set by JS */
+    transform: translateY(0);
     transition: transform 0.1s ease-out;
     z-index: 2;
-    width: 100%;
-    /* No need for position: relative here if container handles vertical centering and mouse movement on profile-group */
-}
-
-.rectangle {
-    height: 200px;
-    width: 420px;
-    background-color: #008000;
-    border-radius: 20px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-    position: absolute; /* Position absolutely within the body or container */
-    top: 50%; /* Center vertically in body */
-    left: 50%; /* Center horizontally in body */
-    transform: translate(-50%, -50%); /* Adjust for rectangle's own size */
-    /* This needs to be coordinated with how profile-group is placed */
-    /* For this setup, we'll make the rectangle relative to the container */
-    /* Let's revert rectangle to be relative to container, and profile-group adjusts */
-    /* Remove absolute positioning from here and handle in container */
-}
-
-/* Re-thinking the layout for true centering and stacking */
-/* We'll use .container to hold both the rectangle and the profile-group,
-   and manage their stacking and alignment */
-
-.container {
-    position: relative;
-    width: 420px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    /* Removed padding-top/bottom here, let content dictate height */
-    justify-content: center; /* Center content vertically */
-    min-height: 400px; /* Minimum height for container to see both elements */
-}
-
-.rectangle {
-    height: 200px;
-    width: 420px;
-    background-color: #008000;
-    border-radius: 20px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-    /* Now relative to container flow */
-    margin-bottom: -100px; /* Pull it up to create overlap with the profile-group */
-    /* The value -100px is half of rectangle height (200px), to make it appear half hidden */
-}
-
-.profile-group {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    transform: translateY(0); /* Base transform for mouse movement, set by JS */
-    transition: transform 0.1s ease-out;
-    z-index: 2; /* Ensure it's above the rectangle */
-    width: 100%;
-    /* No explicit positioning needed here, it flows naturally after rectangle */
+    width: 20%;
 }
 
 .profile {
@@ -124,8 +76,6 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    /* Removed transform: translateY(-50%) here, as margin-top handles overlap */
-    /* It now sits naturally as the first item in profile-group */
 }
 
 .profile img {
@@ -162,7 +112,7 @@ body {
     display: flex;
     align-items: center;
     gap: 15px;
-    margin-top: 20px; /* Space between profile and status box */
+    margin-top: 20px;
     z-index: 2;
     position: relative;
 }

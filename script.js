@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const maxLineHeight = 100;
     const minLineHeight = 30;
     const influenceRadius = 150;
+    alert("This site is still under construction");
 
     for (let i = 0; i < numberOfLines; i++) {
         const line = document.createElement('div');
